@@ -3,7 +3,7 @@ echo === AutoLoadX - GUI Version ===
 echo Building and running GUI...
 echo.
 
-cd /d "C:\Users\HP\Load_Testing"
+cd /d "C:\Users\harit\source\AutoLoadX"
 
 if not exist "build" mkdir build
 if not exist "build\classes" mkdir build\classes
