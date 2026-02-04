@@ -108,7 +108,7 @@ public class LoadTestGUI extends JFrame {
                 int[] userCounts = {10, 100, 1000, 5000, 10000, 20000, 50000, 100000};
                 
                 for (int users : userCounts) {
-                    publish("\\n=== AUTOMATED TEST: " + users + " Users ===\\n");
+                    publish("\n=== AUTOMATED TEST: " + users + " Users ===\n");
                     
                     TestConfiguration config = new TestConfiguration();
                     config.setApiEndpoint(endpoint);
@@ -123,8 +123,19 @@ public class LoadTestGUI extends JFrame {
                     
                     publish(formatResults(results));
                     
+                    // Stop conditions
                     if (results.getErrorRate() > 10) {
-                        publish("\\nStopping automated test due to high error rate\\n");
+                        publish("\nStopping: Error rate exceeded 10%\n");
+                        break;
+                    }
+                    
+                    if (results.getAverageResponseTime() > 5000) {
+                        publish("\nStopping: Response time exceeded 5 seconds\n");
+                        break;
+                    }
+                    
+                    if (results.getThroughputPerSecond() < 1) {
+                        publish("\nStopping: Throughput too low (< 1 req/s)\n");
                         break;
                     }
                     
