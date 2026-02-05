@@ -40,7 +40,7 @@ public class LoadTestExecutor {
         System.out.println();
         
         running.set(true);
-        ExecutorService executorService = Executors.newFixedThreadPool(config.getConcurrentUsers());
+        ExecutorService executorService = Executors.newFixedThreadPool(Math.min(config.getConcurrentUsers(), 1000));
         
         // Start monitoring thread
         Thread monitorThread = new Thread(() -> monitorProgress());
